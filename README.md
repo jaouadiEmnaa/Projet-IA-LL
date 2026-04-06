@@ -198,7 +198,9 @@ http://127.0.0.1:8000/docs
 * Displays prediction results, probability, and technical instructions
 
 cd ../frontend
+
 npm install
+
 npm run serve
 
 ---
