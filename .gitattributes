@@ -1,0 +1,2 @@
+Predictive-AI/data/inventaire.xml filter=lfs diff=lfs merge=lfs -text
+Predictive-AI/data/mongo/*.bson filter=lfs diff=lfs merge=lfs -text
