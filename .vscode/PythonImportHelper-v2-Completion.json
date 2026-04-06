@@ -1,0 +1,169 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "xml.etree.ElementTree",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "xml.etree.ElementTree",
+        "description": "xml.etree.ElementTree",
+        "detail": "xml.etree.ElementTree",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "PredictionRequest",
+        "kind": 6,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "class PredictionRequest(BaseModel):\n    designator: int\n    nozzle: int\n    feeder: int\n    material_part: int\n    x: float\n    y: float\n    hour: int\n# --- OLLAMA RAG FUNCTION ---\ndef ask_local_llm(prompt: str):",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "load_xml_data",
+        "kind": 2,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "def load_xml_data(part_no: int):\n    try:\n        tree = ET.parse('../data/inventaire.xml')\n        root = tree.getroot()\n        for item in root.findall('MATERIAL_DETAILS'):\n            if item.get('PARTNO') == str(part_no):\n                return {\n                    \"stock\": item.get('CURRENT_QUANTITY'),\n                    \"loc\": f\"{item.get('ZONE_NAME')} / {item.get('STORAGE_UNIT_NAME')}\",\n                    \"reel\": item.get('REEL_ID')",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "ask_local_llm",
+        "kind": 2,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "def ask_local_llm(prompt: str):\n    url = \"http://127.0.0.1:11434/api/generate\"\n    data = {\n        \"model\": \"llama3\",\n        \"prompt\": prompt,\n        \"stream\": False\n    }\n    try:\n        response = requests.post(url, json=data, timeout=10)\n        return response.json().get('response', \"⚠️ No response from LLM\")",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "logger = logging.getLogger(__name__)\napp = FastAPI()\n# --- CORS ---\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# --- FEATURES ORDER (Must match your RF training) ---",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "app = FastAPI()\n# --- CORS ---\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n# --- FEATURES ORDER (Must match your RF training) ---\nFEATURES_ORDER = ['feeder', 'hour', 'material_part', 'designator', 'xy_interaction', 'nozzle']",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "FEATURES_ORDER",
+        "kind": 5,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "FEATURES_ORDER = ['feeder', 'hour', 'material_part', 'designator', 'xy_interaction', 'nozzle']\n# --- LOAD INVENTORY XML ---\ndef load_xml_data(part_no: int):\n    try:\n        tree = ET.parse('../data/inventaire.xml')\n        root = tree.getroot()\n        for item in root.findall('MATERIAL_DETAILS'):\n            if item.get('PARTNO') == str(part_no):\n                return {\n                    \"stock\": item.get('CURRENT_QUANTITY'),",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "model_path",
+        "kind": 5,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "model_path = os.path.join('../notebooks/models', 'maintenance_model.pkl')  # replace with your RF file\nmodel = None\nif os.path.exists(model_path):\n    model = joblib.load(model_path)\n    logger.info(\"✅ Random Forest model loaded successfully\")\nelse:\n    logger.critical(f\"❌ Model file not found at {model_path}\")\n# --- REQUEST SCHEMA ---\nclass PredictionRequest(BaseModel):\n    designator: int",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "Predictive-AI.scripts.llm",
+        "description": "Predictive-AI.scripts.llm",
+        "peekOfCode": "model = None\nif os.path.exists(model_path):\n    model = joblib.load(model_path)\n    logger.info(\"✅ Random Forest model loaded successfully\")\nelse:\n    logger.critical(f\"❌ Model file not found at {model_path}\")\n# --- REQUEST SCHEMA ---\nclass PredictionRequest(BaseModel):\n    designator: int\n    nozzle: int",
+        "detail": "Predictive-AI.scripts.llm",
+        "documentation": {}
+    }
+]
