@@ -192,6 +192,17 @@ http://127.0.0.1:8000/docs
 
 ---
 
+## ✅ Frontend (Vue.js)
+* User-friendly dashboard
+* Input form for machine coordinates & components
+* Displays prediction results, probability, and technical instructions
+
+cd ../frontend
+npm install
+npm run serve
+
+---
+
 ## 👨‍💻 Author
 
 * Sirine Hamdi
